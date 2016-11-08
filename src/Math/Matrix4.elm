@@ -51,6 +51,9 @@ orthonormal.
 inverseOrthonormal : Mat4 -> Mat4
 inverseOrthonormal = Native.MJS.m4x4inverseOrthonormal
 
+inverse : Mat4 -> Mat4
+inverse = Native.MJS.m4x4inverse
+
 {-| Creates a matrix for a projection frustum with the given parameters.
 
 Parameters:
