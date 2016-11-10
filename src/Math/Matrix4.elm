@@ -27,6 +27,10 @@ existing matrix.
 
 @docs makeRotate, makeScale, makeScale3, makeTranslate, makeTranslate3
 
+# Conversions
+
+@docs toColumns, fromColumns
+
 -}
 
 import Native.MJS
@@ -198,3 +202,9 @@ transpose = Native.MJS.m4x4transpose
 -}
 makeBasis : Vec3 -> Vec3 -> Vec3 -> Mat4
 makeBasis = Native.MJS.m4x4makeBasis
+
+toColumns : Mat4 -> (Vec4, Vec4, Vec4, Vec4)
+toColumns : Native.MJS.m4x4toColumns
+
+fromColumns : (Vec4, Vec4, Vec4, Vec4) -> Mat4
+fromColumns : Native.MJS.m4x4fromColumns
