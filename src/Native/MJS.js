@@ -617,6 +617,15 @@ var _elm_community$elm_linear_algebra$Native_MJS = function() {
         return r;
     };
 
+
+    /* 
+     * Function: M4x4.inverse
+     * 
+     * Computes the inverse of the matrix if possible.
+     *
+     * Returns Elm Nothing value if not possible; otherwise returns inverse
+     * value as Elm `Just` value.
+     */
     M4x4.inverse = function M4x4_inverse(m, r) {
         if (r == undefined)
             r = new MJS_FLOAT_ARRAY_TYPE(16);
@@ -642,8 +651,12 @@ var _elm_community$elm_linear_algebra$Native_MJS = function() {
         r[15] = m[0]*m[5]*m[10] - m[0]*m[9]*m[6] - m[1]*m[4]*m[10] + m[1]*m[8]*m[6] + m[2]*m[4]*m[9] - m[2]*m[8]*m[5];
 
         var det = m[0]*r[0] + m[1]*r[4] + m[2]*r[8] + m[3]*r[12];
+        if (det == 0) {
+            return _elm_lang$core$Maybe$Nothing;
+        }
+
         for (var i = 0; i < 16; i++) r[i] /= det;
-        return r;
+        return _elm_lang$core$Maybe$Just(r);
     }
 
     /*

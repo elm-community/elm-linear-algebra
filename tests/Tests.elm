@@ -45,10 +45,18 @@ m4Suite =
                 let
                     m =
                         M4.makeRotate 1 (V3.vec3 3 4 5)
+
+                    mInvertedMaybe =
+                        M4.inverse m
                 in
-                    expectMatrixEqual 1.0e-6
-                        (M4.mul m (M4.inverse m))
-                        M4.identity
+                    case mInvertedMaybe of
+                        Nothing ->
+                            Expect.fail "matrix not invertable"
+
+                        Just mInverted ->
+                            expectMatrixEqual 1.0e-6
+                                (M4.mul m mInverted)
+                                M4.identity
         , test "fromColumns vs identity" <|
             \() ->
                 Expect.equal

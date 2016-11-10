@@ -56,9 +56,10 @@ orthonormal.
 inverseOrthonormal : Mat4 -> Mat4
 inverseOrthonormal = Native.MJS.m4x4inverseOrthonormal
 
-{-| Compute the inverse of the matrix.
+{-| Computes the inverse of the matrix. If the inverse cannot be calculated
+(determinant is zero) then this returns Nothing.
 -}
-inverse : Mat4 -> Mat4
+inverse : Mat4 -> Maybe Mat4
 inverse = Native.MJS.m4x4inverse
 
 {-| Creates a matrix for a projection frustum with the given parameters.
