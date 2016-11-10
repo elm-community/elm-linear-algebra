@@ -35,6 +35,7 @@ existing matrix.
 
 import Native.MJS
 import Math.Vector3 exposing (Vec3)
+import Math.Vector4 exposing (Vec4)
 
 {-| 4x4 matrix type -}
 type Mat4 = Mat4
@@ -204,7 +205,7 @@ makeBasis : Vec3 -> Vec3 -> Vec3 -> Mat4
 makeBasis = Native.MJS.m4x4makeBasis
 
 toColumns : Mat4 -> (Vec4, Vec4, Vec4, Vec4)
-toColumns : Native.MJS.m4x4toColumns
+toColumns = Native.MJS.m4x4toColumns
 
 fromColumns : (Vec4, Vec4, Vec4, Vec4) -> Mat4
-fromColumns : Native.MJS.m4x4fromColumns
+fromColumns = Native.MJS.m4x4fromColumns

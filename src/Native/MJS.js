@@ -1786,6 +1786,7 @@ var _elm_community$elm_linear_algebra$Native_MJS = function() {
 
     M4x4.toColumns = function M4x4_toColumns(m) {
         var r = {
+            ctor: '_Tuple4',
             _0: new MJS_FLOAT_ARRAY_TYPE(4),
             _1: new MJS_FLOAT_ARRAY_TYPE(4),
             _2: new MJS_FLOAT_ARRAY_TYPE(4),
@@ -1864,8 +1865,8 @@ var _elm_community$elm_linear_algebra$Native_MJS = function() {
         m4x4transpose: M4x4.transpose,
         m4x4transformPoint: F2(M4x4.transformPoint),
         m4x4makeBasis: F3(M4x4.makeBasis),
-        m4x4fromColumns: F1(M4x4.fromColumns),
-        m4x4toColumns: F1(M4x4.toColummns)
+        m4x4fromColumns: M4x4.fromColumns,
+        m4x4toColumns: M4x4.toColumns
     };
 
 }();
