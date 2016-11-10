@@ -13,7 +13,7 @@ existing matrix.
 
 # Operations
 
-@docs inverseOrthonormal, mul, mulAffine, transpose, makeBasis, transform
+@docs inverseOrthonormal, mul, mulAffine, transpose, makeBasis, transform, inverse
 
 # Projections
 
@@ -56,6 +56,8 @@ orthonormal.
 inverseOrthonormal : Mat4 -> Mat4
 inverseOrthonormal = Native.MJS.m4x4inverseOrthonormal
 
+{-| Compute the inverse of the matrix.
+-}
 inverse : Mat4 -> Mat4
 inverse = Native.MJS.m4x4inverse
 
@@ -204,8 +206,12 @@ transpose = Native.MJS.m4x4transpose
 makeBasis : Vec3 -> Vec3 -> Vec3 -> Mat4
 makeBasis = Native.MJS.m4x4makeBasis
 
+{-| Deconstruct a matrix into column vectors.
+-}
 toColumns : Mat4 -> (Vec4, Vec4, Vec4, Vec4)
 toColumns = Native.MJS.m4x4toColumns
 
+{-| Construct a matrix from column vectors.
+-}
 fromColumns : (Vec4, Vec4, Vec4, Vec4) -> Mat4
 fromColumns = Native.MJS.m4x4fromColumns
