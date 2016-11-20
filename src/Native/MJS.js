@@ -617,6 +617,35 @@ var _elm_community$elm_linear_algebra$Native_MJS = function() {
         return r;
     };
 
+    M4x4.inverse = function M4x4_inverse(m, r) {
+        if (r == undefined)
+            r = new MJS_FLOAT_ARRAY_TYPE(16);
+
+        r[0] = m[5]*m[10]*m[15] - m[5]*m[14]*m[11] - m[6]*m[9]*m[15] + m[6]*m[13]*m[11] + m[7]*m[9]*m[14] - m[7]*m[13]*m[10];
+        r[1] = -m[1]*m[10]*m[15] + m[1]*m[14]*m[11] + m[2]*m[9]*m[15] - m[2]*m[13]*m[11] - m[3]*m[9]*m[14] + m[3]*m[13]*m[10];
+        r[2] = m[1]*m[6]*m[15] - m[1]*m[14]*m[7] - m[2]*m[5]*m[15] + m[2]*m[13]*m[7] + m[3]*m[5]*m[14] - m[3]*m[13]*m[6];
+        r[3] = -m[1]*m[6]*m[11] + m[1]*m[10]*m[7] + m[2]*m[5]*m[11] - m[2]*m[9]*m[7] - m[3]*m[5]*m[10] + m[3]*m[9]*m[6];
+
+        r[4] = -m[4]*m[10]*m[15] + m[4]*m[14]*m[11] + m[6]*m[8]*m[15] - m[6]*m[12]*m[11] - m[7]*m[8]*m[14] + m[7]*m[12]*m[10];
+        r[5] = m[0]*m[10]*m[15] - m[0]*m[14]*m[11] - m[2]*m[8]*m[15] + m[2]*m[12]*m[11] + m[3]*m[8]*m[14] - m[3]*m[12]*m[10];
+        r[6] = -m[0]*m[6]*m[15] + m[0]*m[14]*m[7] + m[2]*m[4]*m[15] - m[2]*m[12]*m[7] - m[3]*m[4]*m[14] + m[3]*m[12]*m[6];
+        r[7] = m[0]*m[6]*m[11] - m[0]*m[10]*m[7] - m[2]*m[4]*m[11] + m[2]*m[8]*m[7] + m[3]*m[4]*m[10] - m[3]*m[8]*m[6];
+
+        r[8] = m[4]*m[9]*m[15] - m[4]*m[13]*m[11] - m[5]*m[8]*m[15] + m[5]*m[12]*m[11] + m[7]*m[8]*m[13] - m[7]*m[12]*m[9];
+        r[9] = -m[0]*m[9]*m[15] + m[0]*m[13]*m[11] + m[1]*m[8]*m[15] - m[1]*m[12]*m[11] - m[3]*m[8]*m[13] + m[3]*m[12]*m[9];
+        r[10] = m[0]*m[5]*m[15] - m[0]*m[13]*m[7] - m[1]*m[4]*m[15] + m[1]*m[12]*m[7] + m[3]*m[4]*m[13] - m[3]*m[12]*m[5];
+        r[11] = -m[0]*m[5]*m[11] + m[0]*m[9]*m[7] + m[1]*m[4]*m[11] - m[1]*m[8]*m[7] - m[3]*m[4]*m[9] + m[3]*m[8]*m[5];
+
+        r[12] = -m[4]*m[9]*m[14] + m[4]*m[13]*m[10] + m[5]*m[8]*m[14] - m[5]*m[12]*m[10] - m[6]*m[8]*m[13] + m[6]*m[12]*m[9];
+        r[13] = m[0]*m[9]*m[14] - m[0]*m[13]*m[10] - m[1]*m[8]*m[14] + m[1]*m[12]*m[10] + m[2]*m[8]*m[13] - m[2]*m[12]*m[9];
+        r[14] = -m[0]*m[5]*m[14] + m[0]*m[13]*m[6] + m[1]*m[4]*m[14] - m[1]*m[12]*m[6] - m[2]*m[4]*m[13] + m[2]*m[12]*m[5];
+        r[15] = m[0]*m[5]*m[10] - m[0]*m[9]*m[6] - m[1]*m[4]*m[10] + m[1]*m[8]*m[6] + m[2]*m[4]*m[9] - m[2]*m[8]*m[5];
+
+        var det = m[0]*r[0] + m[1]*r[4] + m[2]*r[8] + m[3]*r[12];
+        for (var i = 0; i < 16; i++) r[i] /= det;
+        return r;
+    }
+
     /*
      * Function: M4x4.inverseTo3x3
      *
@@ -1730,6 +1759,60 @@ var _elm_community$elm_linear_algebra$Native_MJS = function() {
 
     };
 
+    M4x4.fromColumns = function M4x4_fromColumns(t) {
+
+        var r = new MJS_FLOAT_ARRAY_TYPE(16);
+
+        r[0] = t._0[0];
+        r[1] = t._0[1];
+        r[2] = t._0[2];
+        r[3] = t._0[3];
+        r[4] = t._1[0];
+        r[5] = t._1[1];
+        r[6] = t._1[2];
+        r[7] = t._1[3];
+        r[8] = t._2[0];
+        r[9] = t._2[1];
+        r[10] = t._2[2];
+        r[11] = t._2[3];
+        r[12] = t._3[0];
+        r[13] = t._3[1];
+        r[14] = t._3[2];
+        r[15] = t._3[3];
+
+        return r;
+
+    };
+
+    M4x4.toColumns = function M4x4_toColumns(m) {
+        var r = {
+            _0: new MJS_FLOAT_ARRAY_TYPE(4),
+            _1: new MJS_FLOAT_ARRAY_TYPE(4),
+            _2: new MJS_FLOAT_ARRAY_TYPE(4),
+            _3: new MJS_FLOAT_ARRAY_TYPE(4)
+        };
+
+        r._0[0] = m[0];
+        r._0[1] = m[1];
+        r._0[2] = m[2];
+        r._0[3] = m[3];
+        r._1[0] = m[4];
+        r._1[1] = m[5];
+        r._1[2] = m[6];
+        r._1[3] = m[7];
+        r._2[0] = m[8];
+        r._2[1] = m[9];
+        r._2[2] = m[10];
+        r._2[3] = m[11];
+        r._3[0] = m[12];
+        r._3[1] = m[13];
+        r._3[2] = m[14];
+        r._3[3] = m[15];
+
+        return r;
+    }
+
+	
     return {
         vec3: F3(V3.$),
         v3getX: V3.getX,
@@ -1758,6 +1841,7 @@ var _elm_community$elm_linear_algebra$Native_MJS = function() {
         m4x4identity: M4x4.identity,
         m4x4topLeft3x3: M4x4.topLeft3x3,
         m4x4inverseOrthonormal: M4x4.inverseOrthonormal,
+        m4x4inverse: M4x4.inverse,
         m4x4inverseTo3x3: M4x4.inverseTo3x3,
         m4x4makeFrustum: F6(M4x4.makeFrustum),
         m4x4makePerspective: F4(M4x4.makePerspective),
@@ -1779,7 +1863,9 @@ var _elm_community$elm_linear_algebra$Native_MJS = function() {
         m4x4makeLookAt: F3(M4x4.makeLookAt),
         m4x4transpose: M4x4.transpose,
         m4x4transformPoint: F2(M4x4.transformPoint),
-        m4x4makeBasis: F3(M4x4.makeBasis)
+        m4x4makeBasis: F3(M4x4.makeBasis),
+        m4x4fromColumns: F1(M4x4.fromColumns),
+        m4x4toColumns: F1(M4x4.toColummns)
     };
 
 }();
